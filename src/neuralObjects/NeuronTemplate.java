@@ -1,0 +1,42 @@
+package neuralObjects;
+
+/**
+ * This class contains all the information that needed to generate a Neuron except for the connections between Neurons.
+ * @author mehul
+ *
+ */
+public class NeuronTemplate {
+	public NeuronType myType;
+	public String id;
+	
+	/* These are two values that may or may not be used
+	 * by the implementation of this Neuron
+	 */
+	public static final int MAX_NEURON_VALUES = 2;
+	public float[] values = new float[MAX_NEURON_VALUES];
+
+	public NeuronTemplate(NeuronType myType, String id) {
+		this.myType = myType;
+		this.id = id;
+	}
+	
+	@Override
+	public String toString(){
+		String result = "["+myType.getName();
+		for(int i=0; i<values.length; i++){
+			result += ","+values[i];
+		}
+		return result + "]"; 
+	}
+	
+	/**
+	 * Attempts to generate a new neuron template from the given input neuron definition
+	 * @param neuronDef
+	 * @return
+	 */
+	public static NeuronTemplate MakeNewNeuronFromString(String neuronDef){
+		String[] parsedString = neuronDef.split(" ");
+		
+		return n;
+	}
+}
