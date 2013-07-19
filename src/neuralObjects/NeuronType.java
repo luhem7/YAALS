@@ -38,6 +38,7 @@ public enum NeuronType {
 				return e;
 		}
 		
+		System.err.println("Could not parse the following neuron type: "+name);
 		return null;
 	}
 }
