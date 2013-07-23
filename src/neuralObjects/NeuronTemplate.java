@@ -1,7 +1,5 @@
 package neuralObjects;
 
-import java.text.ParseException;
-
 /**
  * This class contains all the information that needed to generate a Neuron except for the connections between Neurons.
  * @author mehul
@@ -36,7 +34,7 @@ public class NeuronTemplate {
 	 * @param neuronDef
 	 * @return
 	 */
-	public static NeuronTemplate BuildNeuronTemplate(String neuronDef){
+	public static NeuronTemplate buildNeuronTemplate(String neuronDef){
 		String[] parsedString = neuronDef.split(" ");
 		
 		if(parsedString.length < 2){
@@ -47,7 +45,7 @@ public class NeuronTemplate {
 		NeuronType newType;
 		
 		if((newType = NeuronType.getNeuronType(parsedString[1])) == null ){
-			System.out.println("There was an error parsing the following line: "+neuronDef);
+			System.err.println("There was an error parsing the following line: "+neuronDef);
 			return null;
 		}
 		
@@ -68,4 +66,5 @@ public class NeuronTemplate {
 		
 		return n;
 	}
+
 }

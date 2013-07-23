@@ -13,8 +13,8 @@ public class TurnCCWAffector extends AffectorNeuron {
 	 * @param sleepPeriod This is the length of time that this neuron remains inactive after firing once.
 	 * Units of time for this are measured in 1/60 of a second
 	 */
-	public TurnCCWAffector(CreatureModel myCreature, float sleepPeriod) {
-		super(NeuronType.AFFECTOR_TURN_CCW, myCreature, sleepPeriod);
+	public TurnCCWAffector(String id, CreatureModel myCreature, float sleepPeriod) {
+		super(id, NeuronType.AFFECTOR_TURN_CCW, myCreature, sleepPeriod);
 	}
 
 	@Override

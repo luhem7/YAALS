@@ -8,13 +8,13 @@ public class LessThanProcessor extends Neuron {
 	 * to a threshold instead of using this neuron to compare two inputs
 	 * @param threshold
 	 */
-	public LessThanProcessor(float threshold) {
-		super(NeuronType.PROC_LESSTHAN);
+	public LessThanProcessor(String id, float threshold) {
+		super(NeuronType.PROC_LESSTHAN, id);
 		this.threshold = threshold;
 	}
 	
-	public LessThanProcessor() {
-		super(NeuronType.PROC_LESSTHAN);
+	public LessThanProcessor(String id) {
+		super(NeuronType.PROC_LESSTHAN, id);
 		threshold = 1;
 	}
 

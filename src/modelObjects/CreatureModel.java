@@ -91,22 +91,22 @@ public class CreatureModel extends ModelObject {
 			switch (neuronTemplate.myType){
 			//Doing all the Sensor Neurons
 			case SENSOR_LINEAR_VEL:
-				newNeuron = new LinearVelocitySensor(this);
+				newNeuron = new LinearVelocitySensor(neuronTemplate.id, this);
 				sensorNeuronList.add(newNeuron);
 				break;
 			
 			//Doing all the Processor Neurons
 			case PROC_LESSTHAN:
-				newNeuron = new LessThanProcessor(neuronTemplate.values[0]);
+				newNeuron = new LessThanProcessor(neuronTemplate.id, neuronTemplate.values[0]);
 				break;
 			
 			//Doing all the Affector neurons
 			case AFFECTOR_PUSH:
-				newNeuron = new PushAffector(this, neuronTemplate.values[0]);
+				newNeuron = new PushAffector(neuronTemplate.id, this, neuronTemplate.values[0]);
 				affectorNeuronList.addLast(newNeuron);
 				break;
 			case AFFECTOR_TURN_CCW:
-				newNeuron = new TurnCCWAffector(this, neuronTemplate.values[0]);
+				newNeuron = new TurnCCWAffector(neuronTemplate.id, this, neuronTemplate.values[0]);
 				affectorNeuronList.addLast(newNeuron);
 				break;
 			default:
@@ -123,16 +123,13 @@ public class CreatureModel extends ModelObject {
 		for (NeuronLink neuronLink : neuronLinkList){
 			Neuron fromNeuron = Neuron.getNeuronByID(fullNeuronList, neuronLink.fromID);
 			if(fromNeuron == null)
-				System.err.println("Could not find Neuron with ID: "+neuronLink.fromID);
+				continue; /* Quietly ignore skip this link because this will probably become
+				a common occurance when full blown evolution occurs*/
 			
 			Neuron toNeuron = Neuron.getNeuronByID(fullNeuronList, neuronLink.toID);
 			if(toNeuron == null)
-				System.err.println("Could not find Neuron with ID: "+neuronLink.toID);
-			
-			if(toNeuron == null || fromNeuron == null){
-				System.err.println("Could not process following neuron link: "+neuronLink);
-				continue; //Skip processing this link instruction
-			}
+				continue; /* Quietly ignore skip this link because this will probably become
+				a common occurance when full blown evolution occurs*/
 			
 			/*Adding the connection
 			The toNeuron will call call the fromNeuron during

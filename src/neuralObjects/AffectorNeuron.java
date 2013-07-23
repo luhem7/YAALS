@@ -16,8 +16,8 @@ public abstract class AffectorNeuron extends Neuron {
 	private float sleepInterval = Settings.SLEEP_INTERVAL;
 	private float sleepPeriod = 0;
 
-	public AffectorNeuron(NeuronType myType, CreatureModel myCreature, float sleepPeriod) {
-		super(myType);
+	public AffectorNeuron(String id, NeuronType myType, CreatureModel myCreature, float sleepPeriod) {
+		super(myType, id);
 		this.myCreature = myCreature;
 		value = 0f; //Setting the default behavior
 		this.sleepPeriod = sleepPeriod;

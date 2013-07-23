@@ -9,8 +9,8 @@ import modelObjects.CreatureModel;
 
 public class PushAffector extends AffectorNeuron {
 
-	public PushAffector(CreatureModel myCreature, float sleepPeriod) {
-		super(NeuronType.AFFECTOR_PUSH, myCreature, sleepPeriod);
+	public PushAffector(String id, CreatureModel myCreature, float sleepPeriod) {
+		super(id, NeuronType.AFFECTOR_PUSH, myCreature, sleepPeriod);
 	}
 
 	@Override

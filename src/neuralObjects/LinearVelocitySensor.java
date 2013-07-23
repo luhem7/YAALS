@@ -6,7 +6,7 @@ import modelObjects.CreatureStateRegister;
 public class LinearVelocitySensor extends Neuron {
 	CreatureModel creature;
 	
-	public LinearVelocitySensor(CreatureModel creature, String id) {
+	public LinearVelocitySensor(String id, CreatureModel creature) {
 		super(NeuronType.SENSOR_LINEAR_VEL, id);
 		
 		this.creature = creature;
