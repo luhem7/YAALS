@@ -140,16 +140,16 @@ public class CreatureModel extends ModelObject {
 		
 		//TODO just for testing
 		
-		//Add always on push affector
-//		AffectorNeuron n_push = new PushAffector(this, 8*1/60f);
+//		//Add always on push affector
+//		AffectorNeuron n_push = new PushAffector("", this, 8*1/60f);
 //		n_push.value = 1f;
 //		n_push.wakeUp();
 //		affectorNeuronList.addLast(n_push);
 //		
 //		//adding linear velocity sensor -> less than processor -> Turn CCW Affector
-//		Neuron n_sens = new LinearVelocitySensor(this);
-//		Neuron n_proc = new LessThanProcessor(1.5f);
-//		Neuron n_turn_ccw = new TurnCCWAffector(this, 120*1/60f);
+//		Neuron n_sens = new LinearVelocitySensor("", this);
+//		Neuron n_proc = new LessThanProcessor("", 1.5f);
+//		Neuron n_turn_ccw = new TurnCCWAffector("", this, 120*1/60f);
 //		
 //		affectorNeuronList.addLast(n_push);
 //		sensorNeuronList.add(n_sens);
