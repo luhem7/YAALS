@@ -1,4 +1,4 @@
-package neuralObjects;
+package dnaObjects;
 
 import java.util.LinkedList;
 

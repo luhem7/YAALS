@@ -7,9 +7,7 @@ import modelObjects.CreatureActions.StateTurn;
 import neuralObjects.AffectorNeuron;
 import neuralObjects.LessThanProcessor;
 import neuralObjects.LinearVelocitySensor;
-import neuralObjects.NeuronLink;
 import neuralObjects.Neuron;
-import neuralObjects.NeuronTemplate;
 import neuralObjects.NeuronType;
 import neuralObjects.PushAffector;
 import neuralObjects.TurnCCWAffector;
@@ -20,6 +18,10 @@ import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
 import org.jbox2d.dynamics.World;
+
+import dnaObjects.Dna;
+import dnaObjects.NeuronLink;
+import dnaObjects.NeuronTemplate;
 
 import utilObjects.Settings;
 import viewObjects.Camera;
@@ -38,15 +40,14 @@ public class CreatureModel extends ModelObject {
 	public CreatureStateRegister nextState = null;
 	
 	//The creature's DNA:
-	LinkedList<NeuronTemplate> neuronTemplateList = new LinkedList<NeuronTemplate>();
-	LinkedList<NeuronLink> neuronLinkList = new LinkedList<NeuronLink>();
+	private Dna myDna;
 	
 	//Maintaining a list of references to different types of 
 	//Neurons to iterate through
-	private LinkedList<Neuron> affectorNeuronList = new LinkedList<Neuron>();
-	private LinkedList<Neuron> sensorNeuronList = new LinkedList<Neuron>();
+	public LinkedList<Neuron> affectorNeuronList = new LinkedList<Neuron>();
+	public LinkedList<Neuron> sensorNeuronList = new LinkedList<Neuron>();
 	
-	public CreatureModel(Vec2 position, float angle, float[] color, Camera myCam, World world){
+	public CreatureModel(Vec2 position, float angle, float[] color, Camera myCam, World world, Dna myDna){
 		//Setting the display
 		myDisplay = new CreatureView(this, myCam);
 		
@@ -72,90 +73,9 @@ public class CreatureModel extends ModelObject {
 		currState = state1;
 		nextState = state2;
 		
+		this.myDna = myDna;
 		//Setting up the neuralNetwork
-		setupNeuralNetwork();
-	}
-	
-	/**
-	 * Sets up this creatures neural network using the NeuronTemplateList and
-	 * NeuronLinkList. Requires that the two lists be setup fully first
-	 */
-	private void setupNeuralNetwork(){
-		//This variable stores a list of all the neurons, just to facilitate looking for a particular Neuron by its ID
-		LinkedList<Neuron> fullNeuronList = new LinkedList<Neuron>();  
-		
-		//**Creating all the neurons
-		for(NeuronTemplate neuronTemplate: neuronTemplateList){
-			Neuron newNeuron = null;
-			
-			switch (neuronTemplate.myType){
-			//Doing all the Sensor Neurons
-			case SENSOR_LINEAR_VEL:
-				newNeuron = new LinearVelocitySensor(neuronTemplate.id, this);
-				sensorNeuronList.add(newNeuron);
-				break;
-			
-			//Doing all the Processor Neurons
-			case PROC_LESSTHAN:
-				newNeuron = new LessThanProcessor(neuronTemplate.id, neuronTemplate.values[0]);
-				break;
-			
-			//Doing all the Affector neurons
-			case AFFECTOR_PUSH:
-				newNeuron = new PushAffector(neuronTemplate.id, this, neuronTemplate.values[0]);
-				affectorNeuronList.addLast(newNeuron);
-				break;
-			case AFFECTOR_TURN_CCW:
-				newNeuron = new TurnCCWAffector(neuronTemplate.id, this, neuronTemplate.values[0]);
-				affectorNeuronList.addLast(newNeuron);
-				break;
-			default:
-				break;
-			}
-			
-			if(newNeuron != null)
-				fullNeuronList.addLast(newNeuron);
-			else
-				System.err.println("Did not know how to add the following neuron to the creature's neural network: "+neuronTemplate);
-		}
-		
-		//**Linking all the neurons
-		for (NeuronLink neuronLink : neuronLinkList){
-			Neuron fromNeuron = Neuron.getNeuronByID(fullNeuronList, neuronLink.fromID);
-			if(fromNeuron == null)
-				continue; /* Quietly ignore skip this link because this will probably become
-				a common occurance when full blown evolution occurs*/
-			
-			Neuron toNeuron = Neuron.getNeuronByID(fullNeuronList, neuronLink.toID);
-			if(toNeuron == null)
-				continue; /* Quietly ignore skip this link because this will probably become
-				a common occurance when full blown evolution occurs*/
-			
-			/*Adding the connection
-			The toNeuron will call call the fromNeuron during
-			processing
-			*/
-			toNeuron.addNeuralConnection(fromNeuron);
-		}
-		
-		//TODO just for testing
-		
-//		//Add always on push affector
-//		AffectorNeuron n_push = new PushAffector("", this, 8*1/60f);
-//		n_push.value = 1f;
-//		n_push.wakeUp();
-//		affectorNeuronList.addLast(n_push);
-//		
-//		//adding linear velocity sensor -> less than processor -> Turn CCW Affector
-//		Neuron n_sens = new LinearVelocitySensor("", this);
-//		Neuron n_proc = new LessThanProcessor("", 1.5f);
-//		Neuron n_turn_ccw = new TurnCCWAffector("", this, 120*1/60f);
-//		
-//		affectorNeuronList.addLast(n_push);
-//		sensorNeuronList.add(n_sens);
-//		n_turn_ccw.addNeuralConnection(n_proc);
-//		n_proc.addNeuralConnection(n_sens);
-//		affectorNeuronList.add(n_turn_ccw);
+		myDna.setupNeuralNetwork(this);
 	}
 
 	/**

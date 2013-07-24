@@ -1,4 +1,6 @@
-package neuralObjects;
+package dnaObjects;
+
+import neuralObjects.NeuronType;
 
 /**
  * This class contains all the information that needed to generate a Neuron except for the connections between Neurons.

@@ -2,6 +2,8 @@ package neuralObjects;
 
 import java.util.LinkedList;
 
+import dnaObjects.NeuronTemplate;
+
 /**
  * This class represents one neuron. 
  * @author mehul
