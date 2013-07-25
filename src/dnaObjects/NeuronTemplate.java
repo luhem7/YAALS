@@ -32,7 +32,12 @@ public class NeuronTemplate {
 	}
 	
 	/**
-	 * Attempts to generate a new neuron template from the given input neuron definition
+	 * Attempts to generate a new neuron template from the given input neuron definition.
+	 * Returns null if there was a parsing error.
+	 * 
+	 * Template:
+	 * <Name of neuron><Space><NeuronType><Space><Values>
+	 * 
 	 * @param neuronDef
 	 * @return
 	 */

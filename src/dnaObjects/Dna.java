@@ -1,6 +1,11 @@
 package dnaObjects;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 import neuralObjects.LessThanProcessor;
 import neuralObjects.LinearVelocitySensor;
@@ -18,6 +23,54 @@ import modelObjects.CreatureModel;
 public class Dna {
 	private LinkedList<NeuronTemplate> neuronTemplateList = new LinkedList<NeuronTemplate>();
 	private LinkedList<NeuronLink> neuronLinkList = new LinkedList<NeuronLink>();
+	
+	/**
+	 * Reads in a file's content and sets up the list of neuron templates and neuron links
+	 * @param fileContents the complete contents of the input file
+	 */
+	public Dna(String filePath) throws IOException{
+		Scanner s = null;
+		try{
+			s = new Scanner(new BufferedReader(new FileReader(filePath)));
+			
+			while(s.hasNext()){
+				String str = s.nextLine();
+				//Checking to see if this is just whitespace.
+				if(str.trim().length() > 0)
+					processDNAInstruction(str);
+			}
+		} catch (FileNotFoundException e) {
+			System.err.println("Could not load file: " + filePath);
+		} finally {
+			if (s != null) {
+				s.close();
+			}
+		}
+	}
+
+	/**
+	 * Processes a single DNA instruction and adds neuronTemplate or link.
+	 * @param line
+	 */
+	public void processDNAInstruction(String line){
+		line = line.toLowerCase();
+		int firstSpaceChar = line.indexOf(" ");
+		String instType = line.substring(0, firstSpaceChar);
+		String restOfInst = line.substring(firstSpaceChar+1);
+		
+		//Check to see if this is a neuron instruction or neuronLink instruction
+		if(instType.equals("neuron")){
+			NeuronTemplate newTemplate = NeuronTemplate.buildNeuronTemplate(restOfInst);
+			if (newTemplate != null)
+				neuronTemplateList.add(newTemplate);
+		} else if (instType.equals("neuralLink")) {
+			LinkedList<NeuronLink> neuronLinks = NeuronLink.buildNeuronLink(restOfInst);
+			if(neuronLinks != null)
+				neuronLinkList.addAll(neuronLinks);
+		} else {
+			System.err.println("Could not parse the following line: "+line);
+		}
+	}
 
 	public void addNeuronTemplate(NeuronTemplate nt){
 		neuronTemplateList.add(nt);

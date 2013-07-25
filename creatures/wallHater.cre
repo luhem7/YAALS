@@ -4,4 +4,3 @@ neuron LessThanChecker LessThaLessThanChecker 1.5
 neuron CCWTurner TurnCCW_Aff 2
 
 neuralLink VelocitySensor -> LessThanChecker -> CCWTurner
-
