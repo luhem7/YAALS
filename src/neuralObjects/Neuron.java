@@ -13,17 +13,17 @@ public abstract class Neuron {
 	public String id = null;
 	public float value; //The value stored in this neuron
 	protected NeuronType myType = null;
-	protected LinkedList<Neuron> connections; //The other neurons that this neuron is connected to
+	protected LinkedList<Neuron> connectionsList; //The other neurons that this neuron is connected to
 	
 	public Neuron(NeuronType myType, String id) {
 		this.myType = myType;
 		this.id = id;
-		connections = new LinkedList<Neuron>();
+		connectionsList = new LinkedList<Neuron>();
 	}
 	
 	public Neuron(NeuronTemplate neuronTemplate){
 		this.myType = neuronTemplate.myType;
-		connections = new LinkedList<Neuron>();
+		connectionsList = new LinkedList<Neuron>();
 	}
 	
 	/**
@@ -31,7 +31,7 @@ public abstract class Neuron {
 	 * @param newConnection
 	 */
 	public void addNeuralConnection(Neuron newConnection){
-		this.connections.addLast(newConnection);
+		this.connectionsList.addLast(newConnection);
 	}
 	
 	public NeuronType getNeuronType(){

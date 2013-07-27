@@ -20,7 +20,7 @@ public class TurnCCWAffector extends AffectorNeuron {
 	@Override
 	public float processNeuron() {
 		if(!isAsleep()){
-			for(Neuron n: connections)
+			for(Neuron n: connectionsList)
 				value = n.processNeuron();
 			
 			if(value >= 1){

@@ -82,13 +82,14 @@ public class CreatureModel extends ModelObject {
 	 * Processes neurons and based on the results, it sets up the nextState
 	 */
 	@Override
-	public void logicCycle() {		
+	public void logicCycle() {
 		//Setting up the creature's current state using myBody variables:
 		currState.setVelocity(myBody.getLinearVelocity());
 
 		//Process all affector neurons:
-		for(Neuron neuron : affectorNeuronList)
+		for(Neuron neuron : affectorNeuronList){
 			neuron.processNeuron();
+		}
 	}
 	
 	/**
