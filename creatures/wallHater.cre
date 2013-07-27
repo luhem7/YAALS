@@ -1,6 +1,6 @@
-neuron Pusher Push_Aff 0.1333
-neuron VelocitySensor LinVel_Sen
-neuron LessThanChecker LessThaLessThanChecker 1.5
-neuron CCWTurner TurnCCW_Aff 2
+neuron Pusher push_aff 0.1333
+neuron VelocitySensor lin_vel_sen
+neuron LessThanChecker less_than_proc 1.5
+neuron CCWTurner push_aff 2
 
 neuralLink VelocitySensor -> LessThanChecker -> CCWTurner

@@ -54,5 +54,7 @@ public final class Settings {
 	public static final float CAM_DELTA_ZOOM = 0.001f; //The rate at which the camera zooms
 	public static final float CAM_DELTA_ANGLE = PI/20; // The rate at which the angle changes every iteration
 	
+	//TODO Make this creature file path dynamic
+	public static final String selectedCreatureFile = "./creatures/wallHater.cre"; //The file that contains the selected creature's DNA 	
 }
 

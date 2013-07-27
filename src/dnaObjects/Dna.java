@@ -28,7 +28,7 @@ public class Dna {
 	 * Reads in a file's content and sets up the list of neuron templates and neuron links
 	 * @param fileContents the complete contents of the input file
 	 */
-	public Dna(String filePath) throws IOException{
+	public Dna(String filePath){
 		Scanner s = null;
 		try{
 			s = new Scanner(new BufferedReader(new FileReader(filePath)));
@@ -41,11 +41,37 @@ public class Dna {
 			}
 		} catch (FileNotFoundException e) {
 			System.err.println("Could not load file: " + filePath);
-		} finally {
+		}finally {
 			if (s != null) {
 				s.close();
 			}
 		}
+	}
+	
+	/**
+	 * Used to create an empty DNA
+	 */
+	public Dna(){	
+	}
+	
+	/**
+	 * Returns a perfect copy of this dna. Note that this copying process does
+	 * not require getting a newer copy if this piece of DNA
+	 * @return
+	 */
+	public Dna getPerfectCopy(){
+		Dna copyDna = new Dna();
+		//Copying neuronTemplates
+		for(NeuronTemplate nT: this.neuronTemplateList){
+			copyDna.neuronTemplateList.add(nT.getPerfectCopy());
+		}
+		
+		//Copying neuronLinks 
+		for(NeuronLink nl: this.neuronLinkList){
+			copyDna.neuronLinkList.add(nl.getPerfectCopy());
+		}
+		
+		return copyDna;
 	}
 
 	/**
@@ -63,7 +89,7 @@ public class Dna {
 			NeuronTemplate newTemplate = NeuronTemplate.buildNeuronTemplate(restOfInst);
 			if (newTemplate != null)
 				neuronTemplateList.add(newTemplate);
-		} else if (instType.equals("neuralLink")) {
+		} else if (instType.equals("neurallink")) {
 			LinkedList<NeuronLink> neuronLinks = NeuronLink.buildNeuronLink(restOfInst);
 			if(neuronLinks != null)
 				neuronLinkList.addAll(neuronLinks);

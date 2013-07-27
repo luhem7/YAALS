@@ -22,13 +22,26 @@ public class NeuronTemplate {
 		this.id = id;
 	}
 	
+	/**
+	 * Returns a perfect copy of this template
+	 * @return
+	 */
+	public NeuronTemplate getPerfectCopy(){
+		NeuronTemplate copy = new NeuronTemplate(this.myType, this.id);
+		for (int i=0; i<this.values.length; i++){
+			copy.values[i] = this.values[i];
+		}
+		
+		return copy;
+	}
+	
 	@Override
 	public String toString(){
-		String result = "["+myType.getName();
+		String result = myType.getName();
 		for(int i=0; i<values.length; i++){
 			result += ","+values[i];
 		}
-		return result + "]"; 
+		return result; 
 	}
 	
 	/**

@@ -14,6 +14,8 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.PixelFormat;
 
+import dnaObjects.Dna;
+
 import utilObjects.Settings;
 import viewObjects.Camera;
 
@@ -37,7 +39,8 @@ public class Simulator {
 	private ModelObject ghostPoly = null;
 	private Camera myCam = new Camera();
 	private World world;
-	
+	private Dna selectedDna = null; //The Dna to use when inserting a creature into the sim
+	//Inital mouse click on placing creature
 	private float initMouseX = 0;
 	private float initMouseY = 0;
 	
@@ -48,7 +51,7 @@ public class Simulator {
 		setupPhysics();
 		
 		//Setting up world items
-		setupWalls();
+		setupSim();
 		
 		while(!Display.isCloseRequested()){
 			this.loopCycle();
@@ -189,12 +192,16 @@ public class Simulator {
 	}
 	
 	/**
-	 * Sets up the boundary walls for this world
+	 * Sets up simulation specific items
 	 */
-	private void setupWalls(){
+	private void setupSim(){
+		//**Sets up the boundary walls for this world
 		ModelObject newModel = new WallModel(myCam, world);
 		//Adding the wall to the models list so that they are also rendered
 		modelObjectList.add(newModel);
+		
+		//**Read in default selected creature's DNA
+		selectedDna = new Dna(Settings.selectedCreatureFile);
 	}
 	
 	/**
@@ -213,7 +220,7 @@ public class Simulator {
 		float[] randColor = {rand.nextFloat(), rand.nextFloat(), rand.nextFloat()};
 		Vec2 position = new Vec2(xpos, ypos);
 		float randAngle = 360*rand.nextFloat();
-		CreatureModel newCreature = new CreatureModel(position, randAngle, randColor, myCam, world);
+		CreatureModel newCreature = new CreatureModel(position, randAngle, randColor, myCam, world, selectedDna.getPerfectCopy());
 	    
 		modelObjectList.add(newCreature);
 		creatureList.add(newCreature);

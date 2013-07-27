@@ -11,12 +11,29 @@ public class NeuronLink {
 
 	public String fromID = ""; // The neuron where information is flowing out of
 	public String toID = ""; //The neuron where information is flowing to
+
+	public NeuronLink(){
+		
+	}
+	
+	public NeuronLink(String fromID, String toID){
+		this.fromID = fromID;
+		this.toID = toID;
+	}
+	
+	/**
+	 * Returns a perfect copy of this neuron Link.
+	 * @return
+	 */
+	public NeuronLink getPerfectCopy(){
+		return new NeuronLink(this.fromID, this.toID);
+	}
+	
 	
 	@Override
 	public String toString() {
-		return "["+ fromID + " -> "+ "]";
+		return fromID + " -> "+ toID;
 	}
-
 	
 	/**
 	 * Builds a List of neuron link objects from a string representing a set of connections.
