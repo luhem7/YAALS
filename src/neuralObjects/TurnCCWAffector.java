@@ -20,21 +20,21 @@ public class TurnCCWAffector extends AffectorNeuron {
 	@Override
 	public float processNeuron() {
 		if(!isAsleep()){
-			for(Neuron n: connectionsList)
-				value = n.processNeuron();
+			for(Neuron n: inputList)
+				output = n.processNeuron();
 			
-			if(value >= 1){
+			if(output >= 1){
 				myCreature.nextState.turnState = StateTurn.TURN_CCW;
 				myCreature.myBody.applyAngularImpulse(Settings.CREATURE_TURN_FORCE);
-			} else if (value <= -1 ) {
+			} else if (output <= -1 ) {
 				myCreature.nextState.turnState = StateTurn.TURN_CW;
 				myCreature.myBody.applyAngularImpulse(-1*Settings.CREATURE_TURN_FORCE);
 			} else 
 				myCreature.nextState.turnState = StateTurn.TURN_NONE;
 		} else {
-			value = 0; //If the neuron is asleep, it returns a value of zero
+			output = 0; //If the neuron is asleep, it returns a value of zero
 		}
 		
-		return value;
+		return output;
 	}
 }

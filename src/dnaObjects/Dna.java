@@ -165,7 +165,7 @@ public class Dna {
 			The toNeuron will call call the fromNeuron during
 			processing
 			*/
-			toNeuron.addNeuralConnection(fromNeuron);
+			toNeuron.addNeuralInput(fromNeuron);
 		}
 		
 		//TODO just for testing

@@ -19,7 +19,7 @@ public abstract class AffectorNeuron extends Neuron {
 	public AffectorNeuron(String id, NeuronType myType, CreatureModel myCreature, float sleepPeriod) {
 		super(myType, id);
 		this.myCreature = myCreature;
-		value = 0f; //Setting the default behavior
+		output = 0f; //Setting the default behavior
 		this.sleepPeriod = sleepPeriod;
 	}
 
@@ -35,7 +35,7 @@ public abstract class AffectorNeuron extends Neuron {
 	protected boolean isAsleep(){
 		sleepCounter += sleepInterval;
 		
-		if(sleepCounter >= sleepPeriod && value == 0){ // special case where neuron should stay awake until value becomes non zero
+		if(sleepCounter >= sleepPeriod && output == 0){ // special case where neuron should stay awake until value becomes non zero
 			sleepCounter = sleepPeriod;
 			return false;
 		} else if (sleepCounter >= sleepPeriod) {

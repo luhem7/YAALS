@@ -16,17 +16,17 @@ public class PushAffector extends AffectorNeuron {
 	@Override
 	public float processNeuron() {
 		if(!isAsleep()){
-			for(Neuron n: connectionsList)
-				value = n.processNeuron();
+			if (inputList.size() > 0)
+				output = inputList.getFirst().processNeuron();
 			
-			if(value >= 1) {
+			if(output >= 1) {
 				myCreature.nextState.moveState = StateMove.MOVE_FORWARD;
 				Vec2 pushVector = new Vec2();
 				pushVector.x = Settings.CREATURE_PUSH_FORCE*(float)Math.cos(myCreature.getAngle());
 				pushVector.y = Settings.CREATURE_PUSH_FORCE*(float)Math.sin(myCreature.getAngle());
 				myCreature.myBody.applyLinearImpulse(pushVector, myCreature.myBody.getWorldCenter());
 				
-			} else if(-1 < value && value < 1) {
+			} else if(-1 < output && output < 1) {
 				myCreature.nextState.moveState = StateMove.MOVE_NONE;
 			} else {
 				myCreature.nextState.moveState = StateMove.MOVE_BACKWARD;
@@ -37,6 +37,6 @@ public class PushAffector extends AffectorNeuron {
 			}
 		}
 		
-		return value;
+		return output;
 	}
 }

@@ -11,27 +11,27 @@ import dnaObjects.NeuronTemplate;
  */
 public abstract class Neuron {
 	public String id = null;
-	public float value; //The value stored in this neuron
+	public float output; //This neuron's output.
 	protected NeuronType myType = null;
-	protected LinkedList<Neuron> connectionsList; //The other neurons that this neuron is connected to
+	protected LinkedList<Neuron> inputList; //The other neurons that this neuron is connected to
 	
 	public Neuron(NeuronType myType, String id) {
 		this.myType = myType;
 		this.id = id;
-		connectionsList = new LinkedList<Neuron>();
+		inputList = new LinkedList<Neuron>();
 	}
 	
 	public Neuron(NeuronTemplate neuronTemplate){
 		this.myType = neuronTemplate.myType;
-		connectionsList = new LinkedList<Neuron>();
+		inputList = new LinkedList<Neuron>();
 	}
 	
 	/**
 	 * Connects this neuron to "newConnection"
 	 * @param newConnection
 	 */
-	public void addNeuralConnection(Neuron newConnection){
-		this.connectionsList.addLast(newConnection);
+	public void addNeuralInput(Neuron newConnection){
+		this.inputList.addLast(newConnection);
 	}
 	
 	public NeuronType getNeuronType(){
