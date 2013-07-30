@@ -14,6 +14,7 @@ public class LinearVelocitySensor extends Neuron {
 
 	@Override
 	public float processNeuron() {
-		return creature.currState.getVelocityMag();
+		output = creature.currState.getVelocityMag();
+		return output;
 	}
 }

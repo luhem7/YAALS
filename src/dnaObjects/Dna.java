@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import neuralObjects.BlinkerSensor;
 import neuralObjects.LessThanProcessor;
 import neuralObjects.LinearVelocitySensor;
 import neuralObjects.Neuron;
@@ -122,6 +123,10 @@ public class Dna {
 			//Doing all the Sensor Neurons
 			case SENSOR_LINEAR_VEL:
 				newNeuron = new LinearVelocitySensor(neuronTemplate.id, creature);
+				creature.sensorNeuronList.add(newNeuron);
+				break;
+			case SENSOR_BLINKER:
+				newNeuron = new BlinkerSensor(neuronTemplate.myType, neuronTemplate.id, neuronTemplate.values[0]);
 				creature.sensorNeuronList.add(newNeuron);
 				break;
 			

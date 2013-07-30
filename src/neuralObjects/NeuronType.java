@@ -8,6 +8,7 @@ package neuralObjects;
 public enum NeuronType {
 	//Sensor neuron types
 	SENSOR_LINEAR_VEL ("lin_vel_sen"),
+	SENSOR_BLINKER ("blinker_sen"),
 	
 	//Processor neuron types
 	PROC_LESSTHAN ("less_than_proc"),

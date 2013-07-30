@@ -21,12 +21,14 @@ public class LessThanProcessor extends Neuron {
 	@Override
 	public float processNeuron() {
 		if(inputList.isEmpty())
-			return 0;
+			output = 0;
 		else if (inputList.size() == 1){
-			return inputList.getFirst().processNeuron() < threshold ? 1 : 0;
+			output = inputList.getFirst().processNeuron() < threshold ? 1 : 0;
 		}
 		else
-			return inputList.getFirst().processNeuron() < inputList.get(1).processNeuron() ? 1 : 0;
+			output = inputList.getFirst().processNeuron() < inputList.get(1).processNeuron() ? 1 : 0;
+		
+		return output;
 	}
 
 }

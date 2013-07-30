@@ -2,8 +2,6 @@ package neuralObjects;
 
 import java.util.LinkedList;
 
-import dnaObjects.NeuronTemplate;
-
 /**
  * This class represents one neuron. 
  * @author mehul
@@ -18,11 +16,6 @@ public abstract class Neuron {
 	public Neuron(NeuronType myType, String id) {
 		this.myType = myType;
 		this.id = id;
-		inputList = new LinkedList<Neuron>();
-	}
-	
-	public Neuron(NeuronTemplate neuronTemplate){
-		this.myType = neuronTemplate.myType;
 		inputList = new LinkedList<Neuron>();
 	}
 	
