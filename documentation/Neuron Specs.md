@@ -43,6 +43,7 @@ This neuron can do one of two things depending on how it is declared:
   2. If it has more than one input and if the first input is less than the second input, the neuron outputs a 1. Otherwise it outputs a zero.
 ### Syntax
 > neuron <string: neuronId> less_than_proc <float: threshold>
+
 > Example: neuron LessThanProc less_than_proc 1
 
 ## Linear Velocity Sensor Neuron
@@ -50,6 +51,7 @@ This neuron can do one of two things depending on how it is declared:
 This neuron is a sensor type. It outputs the linear velocity of the creature without doing any processing on it.
 ### Syntax
 > neuron <string: neuronId> lin_vel_sen
+
 > Example: neuron VelocitySensor lin_vel_sen
 
 ## Push Affector Neuron
@@ -57,7 +59,9 @@ This neuron is a sensor type. It outputs the linear velocity of the creature wit
 If this neuron's first input is greater than 1, it moves the creature in the direction it is facing. If this neuron's first input is less -1, it moves the creature backwards in the direction it is facing. Otherwise, it does nothing. 
 ### Syntax
 > neuron <string: neuronId> push_aff <float: neuronSleepPeriod>
+
 > Example: neuron Pusher push_aff
+
 neuronSleepPeriod is the minimum length of time this neuron stays asleep once it fires. It is supposed to act like a cap on the firing rate of this affector neuron.
 TODO neuronSleepPeriod is a fucking confusing concept... Need to redo...
 
@@ -66,7 +70,9 @@ TODO neuronSleepPeriod is a fucking confusing concept... Need to redo...
 If this neuron's first input is greater than 1, it rotates the creature counter clockwise. If this neuron's first input is less -1, it moves the creature clockwise. Otherwise, it does nothing.
 ### Syntax
 > neuron <string: neuronId> turn_ccw_aff <float: neuronSleepPeriod>
+
 > neuron Turner turn_ccw_aff
+
 neuronSleepPeriod is the minimum length of time this neuron stays asleep once it fires. It is supposed to act like a cap on the firing rate of this affector neuron.
 
 ## Blinker Neuron
@@ -74,7 +80,9 @@ neuronSleepPeriod is the minimum length of time this neuron stays asleep once it
 This does not process any inputs. It outputs a 1 signal based on its frequency attribute. Other wise the neuron outputs a zero.
 ### Syntax
 > neuron <string: neuronId> blinker_sen <float: frequency in Hz>
+
 > neuron Blinker1 blinker_sen 0.5
+
 Note that because of simulation limitations, the maximum frequency is about 60 Hz. 
 
 ## Neuron
