@@ -28,23 +28,13 @@ The arrows represent the flow of information from one neuron to another.
 There are three broad categories of neurons:
   1. Sensor type: These types of neurons don't process inputs from other neurons. Usually this type of Neuron processes some particular creature state and outputs the result of that processing. For example, a sensor neuron that just outputs the current velocity of the creature.
   2. Processor type: These types of neurons have both inputs and a single output. For example, a processor neuron that just compares two inputs.
-  3. Affector type: These types of neurons process neural inputs, and they may also have an output. But generally speaking, they perform some kind of action upon the creature. For example, a affector neuron that pushes the creature forward when it is activated.
+  3. Affector type: These types of neurons process neural inputs, and they may also have an output. But generally speaking, they perform some kind of action upon the creature. For example, a affector neuron that pushes the creature forward when it is activated. Every affector neuron usually uses an additional attribute called recoveryPeriod. This is the time in seconds in takes for a a neuron recover after firing once. 
   
 
 ## How to write DNA
 Well, first you need to figure out what your creature does. TODO: Flesh out this tutorial
 
 # Types of Neurons #
-
-## Less than Processor Neuron
-### Description 
-This neuron can do one of two things depending on how it is declared:
-  1. If it only has one input and if that input is less than the threshold (a neural attribute), then the neuron outputs a 1. Otherwise it outputs a zero.
-  2. If it has more than one input and if the first input is less than the second input, the neuron outputs a 1. Otherwise it outputs a zero.
-### Syntax
-> neuron <string: neuronId> less_than_proc <float: threshold>
-
-> Example: neuron LessThanProc less_than_proc 1
 
 ## Linear Velocity Sensor Neuron
 ### Description 
@@ -53,27 +43,6 @@ This neuron is a sensor type. It outputs the linear velocity of the creature wit
 > neuron <string: neuronId> lin_vel_sen
 
 > Example: neuron VelocitySensor lin_vel_sen
-
-## Push Affector Neuron
-### Description 
-If this neuron's first input is greater than 1, it moves the creature in the direction it is facing. If this neuron's first input is less -1, it moves the creature backwards in the direction it is facing. Otherwise, it does nothing. 
-### Syntax
-> neuron <string: neuronId> push_aff <float: neuronSleepPeriod>
-
-> Example: neuron Pusher push_aff
-
-neuronSleepPeriod is the minimum length of time this neuron stays asleep once it fires. It is supposed to act like a cap on the firing rate of this affector neuron.
-TODO neuronSleepPeriod is a fucking confusing concept... Need to redo...
-
-## Turn CCW processor
-### Description 
-If this neuron's first input is greater than 1, it rotates the creature counter clockwise. If this neuron's first input is less -1, it moves the creature clockwise. Otherwise, it does nothing.
-### Syntax
-> neuron <string: neuronId> turn_ccw_aff <float: neuronSleepPeriod>
-
-> neuron Turner turn_ccw_aff
-
-neuronSleepPeriod is the minimum length of time this neuron stays asleep once it fires. It is supposed to act like a cap on the firing rate of this affector neuron.
 
 ## Blinker Neuron
 ### Description
@@ -84,6 +53,37 @@ This does not process any inputs. It outputs a 1 signal based on its frequency a
 > neuron Blinker1 blinker_sen 0.5
 
 Note that because of simulation limitations, the maximum frequency is about 60 Hz. 
+
+## Less than Processor Neuron
+### Description 
+This neuron can do one of two things depending on how it is declared:
+  1. If it only has one input and if that input is less than the threshold (a neural attribute), then the neuron outputs a 1. Otherwise it outputs a zero.
+  2. If it has more than one input and if the first input is less than the second input, the neuron outputs a 1. Otherwise it outputs a zero.
+  
+### Syntax
+> neuron <string: neuronId> less_than_proc <float: threshold>
+
+> Example: neuron LessThanProc less_than_proc 1
+
+## Push Affector Neuron
+### Description 
+If this neuron's first input is greater than 1, it moves the creature in the direction it is facing. If this neuron's first input is less -1, it moves the creature backwards in the direction it is facing. Otherwise, it does nothing. 
+### Syntax
+> neuron <string: neuronId> push_aff <float: recoveryPeriod>
+
+> Example: neuron Pusher push_aff 0.5
+
+RecoveryPeriod is the time is the time in seconds in takes for a a neuron recover after firing once. 
+
+## Turn CCW processor
+### Description 
+If this neuron's first input is greater than 1, it rotates the creature counter clockwise. If this neuron's first input is less -1, it moves the creature clockwise. Otherwise, it does nothing.
+### Syntax
+> neuron <string: neuronId> turn_ccw_aff <float: neuronSleepPeriod>
+
+> neuron Turner turn_ccw_aff 0.5
+
+RecoveryPeriod is the time is the time in seconds in takes for a a neuron recover after firing once. 
 
 ## Neuron
 

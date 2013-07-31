@@ -14,32 +14,32 @@ public abstract class AffectorNeuron extends Neuron {
 	protected CreatureModel myCreature = null;
 	private float sleepCounter = 0;
 	private float sleepInterval = Settings.SLEEP_INTERVAL;
-	private float sleepPeriod = 0;
+	private float recoveryPeriod = 0;
 
-	public AffectorNeuron(String id, NeuronType myType, CreatureModel myCreature, float sleepPeriod) {
+	public AffectorNeuron(String id, NeuronType myType, CreatureModel myCreature, float recoveryPeriod) {
 		super(myType, id);
 		this.myCreature = myCreature;
 		output = 0f; //Setting the default behavior
-		this.sleepPeriod = sleepPeriod;
+		this.recoveryPeriod = recoveryPeriod;
 	}
 
 	@Override
 	public abstract float processNeuron();
 	
 	/**
-	 * This method returns if the neuron is sleeping or not. Note that if the current value is zero AND
-	 * the sleep counter is over the sleep period, then the neuron is not put to sleep again until its
+	 * This method returns if the neuron is sleeping or not. Note that if the current output is zero AND
+	 * the sleep counter is over the recoveryPeriod, then the neuron is not put to sleep again until its
 	 * value changes. 
 	 * @return
 	 */
 	protected boolean isAsleep(){
 		sleepCounter += sleepInterval;
 		
-		if(sleepCounter >= sleepPeriod && output == 0){ // special case where neuron should stay awake until value becomes non zero
-			sleepCounter = sleepPeriod;
+		if(sleepCounter >= recoveryPeriod && this.output == 0){ // case where neuron should stay awake until output becomes non zero
+			sleepCounter = recoveryPeriod;
 			return false;
-		} else if (sleepCounter >= sleepPeriod) {
-			sleepCounter = 0; //reset sleep counter if we have reached the sleepPeriod
+		} else if (sleepCounter >= recoveryPeriod) {
+			sleepCounter = 0; //reset sleep counter if we have reached the sleepPeriod and output is not zero
 			return false;
 		} else
 			return true;
@@ -49,7 +49,7 @@ public abstract class AffectorNeuron extends Neuron {
 	 * Sets this neuron to wake up in the next iteration
 	 */
 	public void wakeUp(){
-		sleepCounter = sleepPeriod;
+		sleepCounter = recoveryPeriod;
 	}
 
 }
