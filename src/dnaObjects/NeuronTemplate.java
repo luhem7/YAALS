@@ -37,7 +37,7 @@ public class NeuronTemplate {
 	
 	@Override
 	public String toString(){
-		String result = myType.getName();
+		String result = myType.toString();
 		for(int i=0; i<values.length; i++){
 			result += ","+values[i];
 		}
@@ -55,6 +55,7 @@ public class NeuronTemplate {
 	 * @return
 	 */
 	public static NeuronTemplate buildNeuronTemplate(String neuronDef){
+		
 		String[] parsedString = neuronDef.split(" ");
 		
 		if(parsedString.length < 2){
@@ -69,7 +70,7 @@ public class NeuronTemplate {
 			return null;
 		}
 		
-		NeuronTemplate n = new NeuronTemplate(newType, parsedString[1]);
+		NeuronTemplate n = new NeuronTemplate(newType, parsedString[0]);
 		
 		for(int i=2; i<parsedString.length; i++){
 			if(i >= NeuronTemplate.MAX_NEURON_VALUES+2){

@@ -20,7 +20,7 @@ In each timestep in the simulation, each Neuron gathers the values from its neur
 
 Dna instructions come in two flavors: Neural Template instructions and Neural Link instructions. Neural Template instructions specify the name, output and type of each neuron. Depending on the type of the neuron, a neural template instruction may also be followed by a list of numbers that are used in fleshing out that neuron (further info below). There is only one kind of neuron link instruction. The general format is as follows:
 
-> NeuronId1 -> NeuronId2 -> NeuronId3 -> ...
+>neuralLink NeuronId1 -> NeuronId2 -> NeuronId3 -> ...
 
 The arrows represent the flow of information from one neuron to another.
 

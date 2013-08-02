@@ -49,6 +49,12 @@ public abstract class Neuron {
 		}
 		
 		//If we got here, then we know that we did not find a match
+		// System.out.println("Could not find Neuron with id "+id);
 		return null;
+	}
+	
+	@Override
+	public String toString(){
+		return "neuron "+id+" "+myType;
 	}
 }

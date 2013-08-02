@@ -18,12 +18,13 @@ public enum NeuronType {
 	AFFECTOR_TURN_CCW ("turn_ccw_aff"); //If value >= 1 turns the creature counter clock wise. If value is less than or equal to -1, it turns the creature clockwise.
 	
 	private String name = "";
-	
+
 	private NeuronType(String name){
 		this.name = name;
 	}
 	
-	public String getName(){
+	@Override
+	public String toString(){
 		return name;
 	}
 	
@@ -35,7 +36,7 @@ public enum NeuronType {
 	 */
 	public static NeuronType getNeuronType(String name){
 		for (NeuronType e: NeuronType.values()){
-			if( e.getName().equals(name) )
+			if( e.toString().equals(name) )
 				return e;
 		}
 		

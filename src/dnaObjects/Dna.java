@@ -80,7 +80,6 @@ public class Dna {
 	 * @param line
 	 */
 	public void processDNAInstruction(String line){
-		line = line.toLowerCase();
 		int firstSpaceChar = line.indexOf(" ");
 		String instType = line.substring(0, firstSpaceChar);
 		String restOfInst = line.substring(firstSpaceChar+1);
@@ -90,7 +89,7 @@ public class Dna {
 			NeuronTemplate newTemplate = NeuronTemplate.buildNeuronTemplate(restOfInst);
 			if (newTemplate != null)
 				neuronTemplateList.add(newTemplate);
-		} else if (instType.equals("neurallink")) {
+		} else if (instType.equals("neuralLink")) {
 			LinkedList<NeuronLink> neuronLinks = NeuronLink.buildNeuronLink(restOfInst);
 			if(neuronLinks != null)
 				neuronLinkList.addAll(neuronLinks);
@@ -113,7 +112,7 @@ public class Dna {
 	 */
 	public void setupNeuralNetwork(CreatureModel creature){
 		//This variable stores a list of all the neurons, just to facilitate looking for a particular Neuron by its ID
-		LinkedList<Neuron> fullNeuronList = new LinkedList<Neuron>();  
+		LinkedList<Neuron> allNeuronList = creature.allNeuronList; //new LinkedList<Neuron>();  
 		
 		//**Creating all the neurons
 		for(NeuronTemplate neuronTemplate: neuronTemplateList){
@@ -149,47 +148,27 @@ public class Dna {
 			}
 			
 			if(newNeuron != null)
-				fullNeuronList.addLast(newNeuron);
+				allNeuronList.addLast(newNeuron);
 			else
 				System.err.println("Did not know how to add the following neuron to the creature's neural network: "+neuronTemplate);
 		}
 		
 		//**Linking all the neurons
 		for (NeuronLink neuronLink : neuronLinkList){
-			Neuron fromNeuron = Neuron.getNeuronByID(fullNeuronList, neuronLink.fromID);
-			if(fromNeuron == null)
+			Neuron fromNeuron = Neuron.getNeuronByID(allNeuronList, neuronLink.fromID);
+			if(fromNeuron == null) {
 				continue; /* Quietly ignore skip this link because this will probably become
-				a common occurance when full blown evolution occurs*/
+				a common occurrence when full blown evolution occurs*/
+			}
 			
-			Neuron toNeuron = Neuron.getNeuronByID(fullNeuronList, neuronLink.toID);
+			Neuron toNeuron = Neuron.getNeuronByID(allNeuronList, neuronLink.toID);
 			if(toNeuron == null)
 				continue; /* Quietly ignore skip this link because this will probably become
-				a common occurance when full blown evolution occurs*/
+				a common occurrence when full blown evolution occurs*/
 			
-			/*Adding the connection
-			The toNeuron will call call the fromNeuron during
-			processing
-			*/
+			/*Adding the connection:
+			The toNeuron will call call the fromNeuron during one logic cycle*/
 			toNeuron.addNeuralInput(fromNeuron);
 		}
-		
-		//TODO just for testing
-		
-//		//Add always on push affector
-//		AffectorNeuron n_push = new PushAffector("", this, 8*1/60f);
-//		n_push.value = 1f;
-//		n_push.wakeUp();
-//		affectorNeuronList.addLast(n_push);
-//		
-//		//adding linear velocity sensor -> less than processor -> Turn CCW Affector
-//		Neuron n_sens = new LinearVelocitySensor("", this);
-//		Neuron n_proc = new LessThanProcessor("", 1.5f);
-//		Neuron n_turn_ccw = new TurnCCWAffector("", this, 120*1/60f);
-//		
-//		affectorNeuronList.addLast(n_push);
-//		sensorNeuronList.add(n_sens);
-//		n_turn_ccw.addNeuralConnection(n_proc);
-//		n_proc.addNeuralConnection(n_sens);
-//		affectorNeuronList.add(n_turn_ccw);
 	}
 }

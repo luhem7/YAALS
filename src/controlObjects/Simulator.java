@@ -40,7 +40,7 @@ public class Simulator {
 	private Camera myCam = new Camera();
 	private World world;
 	private Dna selectedDna = null; //The Dna to use when inserting a creature into the sim
-	//Inital mouse click on placing creature
+	//Initial mouse click on placing creature
 	private float initMouseX = 0;
 	private float initMouseY = 0;
 	
@@ -95,7 +95,7 @@ public class Simulator {
 	
 	public void loopCycle(){
 		//**Rendering the objects in the scene
-		//Clear the screen
+		//Clear the scene
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
 		for(ModelObject p : modelObjectList){
 			p.renderView();
@@ -173,7 +173,10 @@ public class Simulator {
 		myCam.loopCycle(); //Process Camera logic
 		
 		
-		//TODO For every creature, change its current state based on simulation 
+		//TODO For every creature, change its current state based on simulation
+		for(CreatureModel creature: creatureList){
+			creature.updateStateByEnv();
+		}
 		
 		//Process logic for every modelObject
 		for(ModelObject m: modelObjectList)
