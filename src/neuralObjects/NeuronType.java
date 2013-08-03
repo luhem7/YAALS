@@ -12,10 +12,11 @@ public enum NeuronType {
 	
 	//Processor neuron types
 	PROC_LESSTHAN ("less_than_proc"),
+	PROC_INVERTER ("invert_proc"),
 	
 	//Affector neuron types: These neurons affect the state of the Creature 
-	AFFECTOR_PUSH ("push_aff"), //If value is >= 1 pushes the creature in the direction it faces. If value is less than or equal to -1, it pushes the creature backwards
-	AFFECTOR_TURN_CCW ("turn_ccw_aff"); //If value >= 1 turns the creature counter clock wise. If value is less than or equal to -1, it turns the creature clockwise.
+	AFFECTOR_PUSH ("push_aff"),
+	AFFECTOR_TURN_CCW ("turn_ccw_aff");
 	
 	private String name = "";
 

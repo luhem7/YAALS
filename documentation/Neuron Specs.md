@@ -65,6 +65,14 @@ This neuron can do one of two things depending on how it is declared:
 
 > Example: neuron LessThanProc less_than_proc 1
 
+## Inverter Neuron
+### Description 
+This neuron just takes the first input and inverts it. If there are no inputs, it just outputs a zero.
+### Syntax
+> neuron <string: neuronId> invert_proc
+
+> neuron Inverter invert_proc
+
 ## Push Affector Neuron
 ### Description 
 If this neuron's first input is greater than 1, it moves the creature in the direction it is facing. If this neuron's first input is less -1, it moves the creature backwards in the direction it is facing. Otherwise, it does nothing. 
@@ -75,7 +83,7 @@ If this neuron's first input is greater than 1, it moves the creature in the dir
 
 RecoveryPeriod is the time is the time in seconds in takes for a a neuron recover after firing once. 
 
-## Turn CCW processor
+## Turn CCW Neuron
 ### Description 
 If this neuron's first input is greater than 1, it rotates the creature counter clockwise. If this neuron's first input is less -1, it moves the creature clockwise. Otherwise, it does nothing.
 ### Syntax
@@ -85,8 +93,8 @@ If this neuron's first input is greater than 1, it rotates the creature counter 
 
 RecoveryPeriod is the time is the time in seconds in takes for a a neuron recover after firing once. 
 
-## Neuron
 
+## Neuron
 ### Description 
 
 ### Syntax

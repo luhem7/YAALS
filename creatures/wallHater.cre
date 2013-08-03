@@ -1,8 +1,16 @@
 neuron Blinker blinker_sen 60
 neuron Pusher push_aff 0.1333
+
+neuralLink Blinker -> Pusher
+
 neuron VelocitySensor lin_vel_sen
 neuron LessThanChecker less_than_proc 0.25
 neuron CCWTurner turn_ccw_aff 1
 
-neuralLink Blinker -> Pusher
 neuralLink VelocitySensor -> LessThanChecker -> CCWTurner
+
+neuron Blinker2 blinker_sen 0.25
+neuron Inverter invert_proc
+neuron CCWTurner2 turn_ccw_aff 0.25
+
+neuralLink Blinker2 -> Inverter -> CCWTurner2

@@ -173,7 +173,7 @@ public class Simulator {
 		myCam.loopCycle(); //Process Camera logic
 		
 		
-		//TODO For every creature, change its current state based on simulation
+		//For every creature, change its current state based on simulation
 		for(CreatureModel creature: creatureList){
 			creature.updateStateByEnv();
 		}

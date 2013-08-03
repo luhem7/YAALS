@@ -29,7 +29,7 @@ public final class Settings {
 	//The "radius" of the creature's display on screen
 	public static final float CREATURE_VIEW_SIZE = 1.3f;
 	//The magnitude of the force applied to the creature during a push
-	public static final float CREATURE_PUSH_FORCE = 0.5f;
+	public static final float CREATURE_PUSH_FORCE = 1f;
 	//The magnitude of the force applied to the creature during a turn (it is CCW)
 	public static final float CREATURE_TURN_FORCE = 2f;
 	

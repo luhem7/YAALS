@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 import neuralObjects.BlinkerSensor;
+import neuralObjects.InverterProcessor;
 import neuralObjects.LessThanProcessor;
 import neuralObjects.LinearVelocitySensor;
 import neuralObjects.Neuron;
@@ -132,6 +133,9 @@ public class Dna {
 			//Doing all the Processor Neurons
 			case PROC_LESSTHAN:
 				newNeuron = new LessThanProcessor(neuronTemplate.id, neuronTemplate.values[0]);
+				break;
+			case PROC_INVERTER:
+				newNeuron = new InverterProcessor(neuronTemplate.id);
 				break;
 			
 			//Doing all the Affector neurons
